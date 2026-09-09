@@ -69,7 +69,7 @@ mediapipe==0.10.21
 Полный список зависимостей:
 
 ```bash
-pip install mediapipe==0.10.21 opencv-python numpy vgamepad
+pip install mediapipe==0.10.21 opencv-python numpy vgamepad PyQt6
 ```
 
 ---
@@ -142,7 +142,7 @@ venv\Scripts\activate
 Установите необходимые библиотеки:
 
 ```bash
-pip install mediapipe==0.10.21 opencv-python numpy vgamepad
+pip install mediapipe==0.10.21 opencv-python numpy vgamepad PyQt6
 ```
 
 ⚠️ **Важно:** проект работает **только с MediaPipe версии 0.10.21**. На более новых версиях (например, `0.10.32`) программа не запускается корректно.
@@ -171,7 +171,6 @@ python main.py
 
 | Клавиша | Действие                  |
 | ------- | ------------------------- |
-| `q`     | Выход                     |
 | `b`     | Синий фон                 |
 | `g`     | Зелёный фон               |
 | `r`     | Обычная камера            |
@@ -207,7 +206,7 @@ python main.py
 
 ### 2. Создание флага кнопки
 
-В начале основного цикла объявите новый флаг кнопки, например для кнопки **X**:
+В файле `hand_tracker.py` в методе `process_frame` объявите новый флаг кнопки, например для кнопки **X**:
 
 ```python
 btn_x = False
@@ -217,7 +216,7 @@ btn_x = False
 
 ### 3. Привязка жеста к кнопке
 
-В блоке **логики управления кнопками геймпада** добавьте условие для нужной зоны.
+В блоке **логика управления кнопками геймпада** добавьте условие для нужной зоны.
 
 Пример: кнопка **X** нажимается, если на левой руке подняты указательный и средний пальцы:
 
@@ -231,13 +230,13 @@ if zone_name == "Left Zone":
 
 ### 4. Применение кнопки к геймпаду
 
-Ниже, в секции применения данных к геймпаду, добавьте обработку кнопки:
+Ниже, в секции **применение данных к геймпаду**, добавьте обработку кнопки:
 
 ```python
 if btn_x:
-    gamepad.press_button(vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
+    self.gamepad.press_button(vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
 else:
-    gamepad.release_button(vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
+    self.gamepad.release_button(vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
 ```
 
 После этого кнопка **X** будет корректно нажиматься и отпускаться в зависимости от жеста.
